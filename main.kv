@@ -7,7 +7,7 @@
 
     DPEAButton:
         id: test_button
-        text: "test" if test_button.state == "normal" else "Changed!"
+        text: 'Off' if test_button.state == 'normal' else 'On' #normal must be lowercase. Single or double quotes don't matter, as long as they're consistent on a word
         size: 100, 100
         x: root.width * 0.75
         y: root.height * 0.5

@@ -7,7 +7,7 @@
 
     DPEAButton:
         id: test_button
-        text: 'test'
+        text: "test" if test_button.state == "normal" else "Changed!"
         size: 100, 100
         x: root.width * 0.75
         y: root.height * 0.5

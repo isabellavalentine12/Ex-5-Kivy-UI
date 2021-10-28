@@ -54,6 +54,8 @@ class MainScreen(Screen):
         :return: None
         """
         print("Callback from MainScreen.pressed()")
+        #return value +1 #needs ", value" after the "self" up there
+
 
     def admin_action(self):
         """

@@ -7,7 +7,6 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
-
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
 from pidev.kivy.PauseScreen import PauseScreen
@@ -47,7 +46,7 @@ class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
     """
-
+    value = 0
     def pressed(self):
         """
         Function called on button touch event for button with id: testButton
@@ -55,6 +54,11 @@ class MainScreen(Screen):
         """
         print("Callback from MainScreen.pressed()")
         #return value +1 #needs ", value" after the "self" up there
+
+#the below pocket of code (2 lines) creates the counter
+        self.value = self.value +1
+        self.counter_button.text = str(self.value) #you need the self to refer to the instance of main screen. The counter_button tells us which button, and the .text tells us to change .text
+
 
 
     def admin_action(self):

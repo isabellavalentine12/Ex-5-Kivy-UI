@@ -2,6 +2,8 @@
     #: import time __main__.time
 
     name: 'main'
+    #I added the below command while creating my counter
+    counter_button: counter_button #right side references id. Left side is refencered in python file.
     FloatLayout:
         size_hint: None, None
 
@@ -22,8 +24,10 @@
         color: .9, 0, 0, 1
         on_press: root.pressed()
 
+#I added the following button to create my button
     DPEAButton:
-        text: "new"
+        id: counter_button
+        text: "0"
         size: 100, 100
         x: root.width * 0.5
         y: root.height * 0.15

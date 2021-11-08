@@ -47,17 +47,29 @@ class MainScreen(Screen):
     Class to handle the main screen and its associated touch events
     """
     value = 0
+
+    def counter(self):
+        self.value = self.value + 1
+        self.counter_button.text = str(self.value)
+        print("Callback from MainScreen.counter()")
+
+    def other_button_text_conversion(self):
+        if self.changed_text.text == "Yeah, right.":
+            self.changed_text.text = "Nooooooooooooooo!"
+        else:
+            self.changed_text.text = "Yeah, right."
+
+
     def pressed(self):
         """
         Function called on button touch event for button with id: testButton
         :return: None
         """
         print("Callback from MainScreen.pressed()")
-        #return value +1 #needs ", value" after the "self" up there
 
 #the below pocket of code (2 lines) creates the counter
-        self.value = self.value +1
-        self.counter_button.text = str(self.value) #you need the self to refer to the instance of main screen. The counter_button tells us which button, and the .text tells us to change .text
+        # self.value = self.value +1
+        # self.counter_button.text = str(self.value) #you need the self to refer to the instance of main screen. The counter_button tells us which button, and the .text tells us to change .text
 
 
 

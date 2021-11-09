@@ -56,8 +56,16 @@ class MainScreen(Screen):
     def other_button_text_conversion(self):
         if self.changed_text.text == "Yeah, right.":
             self.changed_text.text = "Nooooooooooooooo!"
+        elif self.changed_text.text == "Nooooooooooooooo!":
+            self.changed_text.text = "You're mean."
+        elif self.changed_text.text == "You're mean.":
+            self.changed_text.text = "Ughhhhh"
+        elif self.changed_text.text == "Ughhhhh":
+            self.changed_text.text = "Ugh"
+        elif self.changed_text.text == "Ugh!":
+            self.changed_text.text = "Ugh"
         else:
-            self.changed_text.text = "Yeah, right."
+            self.changed_text.text = "Ugh!"
 
 
     def pressed(self):

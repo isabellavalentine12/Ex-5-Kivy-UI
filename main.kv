@@ -6,8 +6,39 @@
     #i_change_text: i_change_text
     changed_text: changed_text
     counter_button: counter_button #right side references id. Left side is refencered in python file.
+    slider: slideer
+
     FloatLayout:
         size_hint: None, None
+
+    Slider:
+        id: slideer
+        min: 0
+        max: 100
+        step: 0.0001
+        orientation: 'horizontal'
+
+    DPEAButton:
+        text: str(round(slideer.value, 1))
+        size: 100, 100
+        x: root.width * 0.45
+        y: root.height * 0.3
+        color: .8, .8, 0, 1
+        on_press: root.pressed()
+
+    #Label:
+        #text: str(round(slideer.value, 3))
+        #color: 0, .5, .5, 1
+
+    #I added the following button to create my counter button
+    DPEAButton:
+        id: counter_button
+        text: "0"
+        size: 100, 100
+        x: root.width * 0.25
+        y: root.height * 0.05
+        color: .8, 0, .5, 1
+        on_press: root.counter()
 
     DPEAButton:
         id: test_button
@@ -36,25 +67,15 @@
         color: 0, .5, .5, 1
         on_press: root.pressed()
 
-#I added the following button to create my counter button
-    DPEAButton:
-        id: counter_button
-        text: "0"
-        size: 100, 100
-        x: root.width * 0.25
-        y: root.height * 0.05
-        color: .8, 0, .5, 1
-        on_press: root.counter()
-
-    SelfUpdatingLabel:
-        id: time_label
-        size_hint: None, None
-        font_size: 30
-        update_property: time.now
-        update_property_parameters: None
-        center_x: root.width * 0.73
-        center_y: root.height * 0.05
-        color: 1, 1, 1, 1
-        bold: True
-        outline_width: self.font_size * 0.1
-        outline_color: 0, 0, 0
+    #SelfUpdatingLabel:
+        #id: time_label
+        #size_hint: None, None
+        #font_size: 30
+        #update_property: time.now
+        #update_property_parameters: None
+        #center_x: root.width * 0.73
+        #center_y: root.height * 0.05
+        #color: 1, 1, 1, 1
+        #bold: True
+        #outline_width: self.font_size * 0.1
+        #outline_color: 0, 0, 0

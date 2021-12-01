@@ -17,6 +17,7 @@
         max: 100
         step: 0.0001
         orientation: 'horizontal'
+        sensitivity: 'handle'
 
     DPEAButton:
         text: str(round(slideer.value, 1))
@@ -25,6 +26,30 @@
         y: root.height * 0.3
         color: .8, .8, 0, 1
         on_press: root.pressed()
+
+    ImageButton:
+        source: '/home/soft-dev/Downloads/alva.jpg'
+        x: root.width * 0.81
+        y: root.height * 0.05
+        on_press: root.admin_action()
+
+    ImageButton:
+        source: '/home/soft-dev/Downloads/alvaro.jpg'
+        x: root.width * 0.65
+        y: root.height * 0.05
+        on_press: root.admin_action()
+
+    ImageButton:
+        source: '/home/soft-dev/Downloads/liz.jpg'
+        x: root.width * 0.7
+        y: root.height * 0.25
+        on_press: root.admin_action()
+
+    ImageButton
+        source: '/home/soft-dev/Downloads/melanie.jpg'
+        x: root.width * 0.87
+        y: root.height * 0.25
+        on_press: root.admin_action()
 
     #Label:
         #text: str(round(slideer.value, 3))

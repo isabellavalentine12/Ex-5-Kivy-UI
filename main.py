@@ -90,7 +90,6 @@ class MainScreen(Screen):
         """
         SCREEN_MANAGER.current = 'passCode'
 
-
 class AdminScreen(Screen):
     """
     Class to handle the AdminScreen and its functionality

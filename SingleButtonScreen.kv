@@ -1,0 +1,11 @@
+<SingleButtonScreen>:
+    name: 'SingleButtonScreen'
+
+    FloatLayout:
+        size_hint: None, None
+
+    ImageButton:
+        source: '/home/soft-dev/Downloads/CesarHarlow.jpg'
+        x: root.width * 0.81
+        y: root.height * 0.05
+        on_press: root.transition_back()

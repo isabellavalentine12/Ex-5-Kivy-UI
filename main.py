@@ -25,6 +25,7 @@ MIXPANEL = MixPanel("Project Name", MIXPANEL_TOKEN)
 SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
+SINGLE_BUTTON_SCREEN_NAME = 'SingleButtonScreen'
 
 
 class ProjectNameGUI(App):
@@ -42,7 +43,6 @@ class ProjectNameGUI(App):
 
 Window.clearcolor = (1, 1, 1, 1)  # White
 
-
 class MainScreen(Screen):
     """
     Class to handle the main screen and its associated touch events
@@ -53,6 +53,10 @@ class MainScreen(Screen):
         self.value = self.value + 1
         self.counter_button.text = str(self.value)
         print("Callback from MainScreen.counter()")
+
+    # the below pocket of code (2 lines) creates the counter
+    # self.value = self.value +1
+    # self.counter_button.text = str(self.value) #you need the self to refer to the instance of main screen. The counter_button tells us which button, and the .text tells us to change .text
 
     def other_button_text_conversion(self):
         if self.changed_text.text == "Yeah, right.":
@@ -76,11 +80,8 @@ class MainScreen(Screen):
         """
         print("Callback from MainScreen.pressed()")
 
-#the below pocket of code (2 lines) creates the counter
-        # self.value = self.value +1
-        # self.counter_button.text = str(self.value) #you need the self to refer to the instance of main screen. The counter_button tells us which button, and the .text tells us to change .text
-
-
+    def transition_to_single_button_screen(self):
+        SCREEN_MANAGER.current = SINGLE_BUTTON_SCREEN_NAME
 
     def admin_action(self):
         """
@@ -89,6 +90,23 @@ class MainScreen(Screen):
         :return: None
         """
         SCREEN_MANAGER.current = 'passCode'
+
+class SingleButtonScreen(Screen):
+    def __init__(self, **kwargs):
+        Builder.load_file('SingleButtonScreen.kv')
+
+        #PassCodeScreen.set_admin_events_screen(ADMIN_SCREEN_NAME)  # Specify screen name to transition to after correct password
+        #PassCodeScreen.set_transition_back_screen(MAIN_SCREEN_NAME)  # set screen name to transition to if "Back to Game is pressed"
+
+        super(SingleButtonScreen, self).__init__(**kwargs)
+
+    @staticmethod
+    def transition_back():
+        """
+        Transition back to the main screen
+        :return:
+        """
+        SCREEN_MANAGER.current = MAIN_SCREEN_NAME
 
 class AdminScreen(Screen):
     """
@@ -139,6 +157,7 @@ Widget additions
 
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(SingleButtonScreen(name=SINGLE_BUTTON_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))

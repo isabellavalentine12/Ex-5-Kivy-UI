@@ -10,6 +10,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
 from pidev.kivy.PauseScreen import PauseScreen
+from kivy.animation import Animation, AnimationTransition
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
 from pidev.kivy.selfupdatinglabel import SelfUpdatingLabel
@@ -48,6 +49,7 @@ class MainScreen(Screen):
     Class to handle the main screen and its associated touch events
     """
     value = 0
+    stepp = 0
 
     def counter(self):
         self.value = self.value + 1
@@ -91,6 +93,21 @@ class MainScreen(Screen):
         """
         SCREEN_MANAGER.current = 'passCode'
 
+    def animate_alvaro(self):
+        print("Called animate")
+        if self.stepp%3 == 0:
+            anim = Animation(x=350) + Animation(size=(200, 200), duration=2.)
+            anim.start(self.alvaro)
+            print("Called alvaro animation (1)")
+        elif self.stepp%3 == 1:
+            SCREEN_MANAGER.current = SINGLE_BUTTON_SCREEN_NAME
+            print("Called screen change (2)")
+        elif self.stepp%3 == 2:
+            anim = Animation(x=490, y=30, duration=0.) + Animation(size=(90, 90), duration=0.)
+            anim.start(self.alvaro)
+            print("Called alvaro back to normal (3)")
+        self.stepp += 1
+
 class SingleButtonScreen(Screen):
     def __init__(self, **kwargs):
         Builder.load_file('SingleButtonScreen.kv')
@@ -107,6 +124,10 @@ class SingleButtonScreen(Screen):
         :return:
         """
         SCREEN_MANAGER.current = MAIN_SCREEN_NAME
+
+    def animate_cesar_harlow(self):
+        anim = Animation(x=200, duration=0.5) + Animation(size=(400, 400), duration=0.5)
+        anim.start(self.cesarharlow)
 
 class AdminScreen(Screen):
     """

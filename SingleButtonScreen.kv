@@ -1,10 +1,13 @@
 <SingleButtonScreen>:
     name: 'SingleButtonScreen'
+    cesarharlow: cesarharlow
+    on_enter: root.animate_cesar_harlow()
 
     FloatLayout:
         size_hint: None, None
 
     ImageButton:
+        id: cesarharlow
         source: '/home/soft-dev/Downloads/CesarHarlow.jpg'
         x: root.width * 0.81
         y: root.height * 0.05

@@ -7,6 +7,7 @@
     changed_text: changed_text
     counter_button: counter_button #right side references id. Left side is refencered in python file.
     slider: slideer
+    alvaro: alvaro
 
     FloatLayout:
         size_hint: None, None
@@ -34,10 +35,11 @@
         on_press: root.admin_action()
 
     ImageButton:
+        id: alvaro
         source: '/home/soft-dev/Downloads/alvaro.jpg'
         x: root.width * 0.65
         y: root.height * 0.05
-        on_press: root.transition_to_single_button_screen()
+        on_press: root.animate_alvaro()
 
     ImageButton:
         source: '/home/soft-dev/Downloads/liz.jpg'

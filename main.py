@@ -6,11 +6,16 @@ import os
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.properties import ObjectProperty
 from kivy.uix.screenmanager import ScreenManager, Screen
 from pidev.MixPanel import MixPanel
 from pidev.kivy.PassCodeScreen import PassCodeScreen
 from pidev.kivy.PauseScreen import PauseScreen
 from kivy.animation import Animation, AnimationTransition
+from pidev.Joystick import Joystick
+joy = Joystick(0, False)
+from threading import Thread
+from time import sleep
 from pidev.kivy import DPEAButton
 from pidev.kivy import ImageButton
 from pidev.kivy.selfupdatinglabel import SelfUpdatingLabel
@@ -27,7 +32,6 @@ SCREEN_MANAGER = ScreenManager()
 MAIN_SCREEN_NAME = 'main'
 ADMIN_SCREEN_NAME = 'admin'
 SINGLE_BUTTON_SCREEN_NAME = 'SingleButtonScreen'
-
 
 class ProjectNameGUI(App):
     """
@@ -50,6 +54,11 @@ class MainScreen(Screen):
     """
     value = 0
     stepp = 0
+
+    shared = ObjectProperty()
+
+    def start_joy_thread(self):  # This should be inside the MainScreen Class
+        Thread(target=self.joy_update).start()
 
     def counter(self):
         self.value = self.value + 1
@@ -108,6 +117,16 @@ class MainScreen(Screen):
             print("Called alvaro back to normal (3)")
         self.stepp += 1
 
+    def joy_update(self):  # This should be inside the MainScreen Class
+        while True:
+            self.joy_label.center_x += joy.get_axis('x')
+            self.joy_label.center_y += joy.get_axis('y')
+            print("X:" ,joy.get_axis('x'), ", Y:", joy.get_axis('y'))
+            self.melanie.x += joy.get_axis('x')
+            self.shared = joy.get_axis('x'), joy.get_axis('y')
+            self.melanie.y += joy.get_axis('y')
+            sleep(.1)
+
 class SingleButtonScreen(Screen):
     def __init__(self, **kwargs):
         Builder.load_file('SingleButtonScreen.kv')
@@ -128,6 +147,10 @@ class SingleButtonScreen(Screen):
     def animate_cesar_harlow(self):
         anim = Animation(x=200, duration=0.5) + Animation(size=(400, 400), duration=0.5)
         anim.start(self.cesarharlow)
+
+    def get_axis(self):
+        print('X:', joy.get_axis('x'))
+        print('Y:', joy.get_axis('y'))
 
 class AdminScreen(Screen):
     """
@@ -178,10 +201,10 @@ Widget additions
 
 Builder.load_file('main.kv')
 SCREEN_MANAGER.add_widget(MainScreen(name=MAIN_SCREEN_NAME))
-SCREEN_MANAGER.add_widget(SingleButtonScreen(name=SINGLE_BUTTON_SCREEN_NAME))
 SCREEN_MANAGER.add_widget(PassCodeScreen(name='passCode'))
 SCREEN_MANAGER.add_widget(PauseScreen(name='pauseScene'))
 SCREEN_MANAGER.add_widget(AdminScreen(name=ADMIN_SCREEN_NAME))
+SCREEN_MANAGER.add_widget(SingleButtonScreen(name=SINGLE_BUTTON_SCREEN_NAME))
 
 """
 MixPanel

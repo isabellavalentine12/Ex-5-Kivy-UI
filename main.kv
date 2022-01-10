@@ -2,12 +2,16 @@
     #: import time __main__.time
 
     name: 'main'
+    on_enter:root.start_joy_thread()
+    #on_enter:root.joy_update()
     #I added the below command while creating my counter
     #i_change_text: i_change_text
     changed_text: changed_text
     counter_button: counter_button #right side references id. Left side is refencered in python file.
     slider: slideer
     alvaro: alvaro
+    melanie: melanie
+    joy_label: joy_label
 
     FloatLayout:
         size_hint: None, None
@@ -50,7 +54,20 @@
         y: root.height * 0.25
         on_press: root.transition_to_single_button_screen()
 
-    ImageButton
+    Label:
+        id: joy_label
+        text: str(root.shared)
+        size_hint: None, None
+        color: 1, .5, 1, 1
+        center_x: root.width * 0.73
+        center_y: root.height * 0.7
+        bold: True
+        outline_width: self.font_size * 0.1
+        outline_color: 0, 0, 0
+
+
+    ImageButton:
+        id: melanie
         source: '/home/soft-dev/Downloads/melanie.jpg'
         size: 90, 90
         x: root.width * 0.87

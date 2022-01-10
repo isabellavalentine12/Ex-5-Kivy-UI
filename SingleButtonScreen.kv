@@ -1,6 +1,7 @@
 <SingleButtonScreen>:
     name: 'SingleButtonScreen'
     cesarharlow: cesarharlow
+    alva: alva
     on_enter: root.animate_cesar_harlow()
 
     FloatLayout:
@@ -12,3 +13,11 @@
         x: root.width * 0.81
         y: root.height * 0.05
         on_press: root.transition_back()
+
+    ImageButton:
+        id: alva
+        source: '/home/soft-dev/Downloads/alva.jpg'
+        x: root.width * 0.81
+        y: root.height * 0.7
+        #on_press: root.get_both_axes()
+        on_press: root.get_axis()

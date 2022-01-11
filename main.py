@@ -58,7 +58,7 @@ class MainScreen(Screen):
     shared = ObjectProperty()
 
     def start_joy_thread(self):  # This should be inside the MainScreen Class
-        Thread(target=self.joy_update).start()
+        Thread(target=self.joy_update, daemon=True).start()
 
     def counter(self):
         self.value = self.value + 1
@@ -118,14 +118,14 @@ class MainScreen(Screen):
         self.stepp += 1
 
     def joy_update(self):  # This should be inside the MainScreen Class
-        while True:
-            self.joy_label.center_x += joy.get_axis('x')
-            self.joy_label.center_y += joy.get_axis('y')
-            print("X:" ,joy.get_axis('x'), ", Y:", joy.get_axis('y'))
-            self.melanie.x += joy.get_axis('x')
-            self.shared = joy.get_axis('x'), joy.get_axis('y')
-            self.melanie.y += joy.get_axis('y')
-            sleep(.1)
+       while True:
+           self.joy_label.center_x += joy.get_axis('x')
+           self.joy_label.center_y += joy.get_axis('y')
+           print("X:" ,joy.get_axis('x'), ", Y:", joy.get_axis('y'))
+           self.melanie.x += joy.get_axis('x')
+           self.shared = joy.get_axis('x'), joy.get_axis('y')
+           self.melanie.y += joy.get_axis('y')
+           sleep(.1)
 
 class SingleButtonScreen(Screen):
     def __init__(self, **kwargs):

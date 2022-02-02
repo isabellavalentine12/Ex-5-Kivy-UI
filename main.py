@@ -1,7 +1,7 @@
 import os
 
-os.environ['DISPLAY'] = ":0.0"
-os.environ['KIVY_WINDOW'] = 'egl_rpi'
+#os.environ['DISPLAY'] = ":0.0"
+#os.environ['KIVY_WINDOW'] = 'egl_rpi'
 
 from kivy.app import App
 from kivy.core.window import Window
